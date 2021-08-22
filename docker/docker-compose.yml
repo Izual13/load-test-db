@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+  mongo1:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo_network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs666", "--bind_ip_all"]
+  mongo2:
+    image: mongo
+    restart: always
+    ports:
+      - "27018:27017"
+    networks:
+      - mongo_network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs666", "--bind_ip_all"]
+  mongo3:
+    image: mongo
+    restart: always
+    ports:
+      - "27019:27017"
+    networks:
+      - mongo_network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password
+    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs666", "--bind_ip_all"]
+  mongo_replicaset_init:
+    image: mongo
+    links:
+      - mongo1:mongo1
+      - mongo2:mongo2
+      - mongo3:mongo3
+    networks:
+      - mongo_network
+    volumes:
+      - ./scripts:/scripts
+    entrypoint: [ "/scripts/init-rs.sh" ]
+
+networks:
+  mongo_network:
