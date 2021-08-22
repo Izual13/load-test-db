@@ -1,6 +1,6 @@
 package com.example.loadtestdb.util;
 
-import com.mongodb.assertions.Assertions;
+import org.springframework.util.Assert;
 
 import java.security.SecureRandom;
 import java.util.Random;
@@ -31,7 +31,7 @@ public class RandomString {
     }
 
     public static String random(int length) {
-        Assertions.isTrue("length > 0", length > 0);
+        Assert.isTrue(length > 0, "length should be more than zero");
         var builder = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
             int rnd = random.nextInt(alphabet.length());

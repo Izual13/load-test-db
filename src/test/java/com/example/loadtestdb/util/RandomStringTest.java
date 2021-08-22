@@ -17,7 +17,7 @@ class RandomStringTest {
     @ParameterizedTest
     @ValueSource(ints = {0, -1, -3, -5})
     void errorWhenRandomStringLengthBelowZero(int length) {
-        assertThrows(IllegalStateException.class, () -> RandomString.random(length));
+        assertThrows(IllegalArgumentException.class, () -> RandomString.random(length));
     }
 
 }
