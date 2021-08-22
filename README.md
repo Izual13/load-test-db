@@ -6,6 +6,8 @@
 > docker-compose up -d
 
 #### hints
+> docker-compose down
+> 
 > docker run -it --network docker_mongo_network mongo sh
 > 
 > docker rm -f $(docker ps -aq)
