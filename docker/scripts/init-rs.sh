@@ -2,7 +2,8 @@
 
 echo init-rs.sh.sh time now: `date +"%T" `
 
-
+#todo: add waiting
+sleep 5
 
 mongosh --host mongo1:27017 <<EOF
 var cfg = {
@@ -16,12 +17,12 @@ var cfg = {
         },
         {
             "_id": 1,
-            "host": "mongo2:27017",
+            "host": "mongo2:27018",
             "priority": 0
         },
         {
             "_id": 2,
-            "host": "mongo3:27017",
+            "host": "mongo3:27019",
             "priority": 0
         }
     ],settings: {chainingAllowed: true}
