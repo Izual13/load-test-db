@@ -1,7 +1,10 @@
 #!/bin/bash
 
 echo init-rs.sh.sh time now: `date +"%T" `
-mongo --host mongo1:27017 <<EOF
+
+
+
+mongosh --host mongo1:27017 <<EOF
 var cfg = {
     "_id": "rs666",
     "version": 1,
@@ -25,7 +28,6 @@ var cfg = {
 };
 rs.initiate(cfg, { force: true });
 rs.reconfig(cfg, { force: true });
-rs.secondaryOk();
+rs.status();
 db.getMongo().setReadPref('nearest');
-db.getMongo().setSecondaryOk();
 EOF
